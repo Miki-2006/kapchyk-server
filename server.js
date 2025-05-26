@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const { MongoClient } = require('mongodb')
+const db = require('./db')
 
 app.get('/', (req, res) => {
     res.send('Успешное соединение!')
@@ -15,11 +15,7 @@ const corsOptions = {
 }
 
 
-const mongodbURI = process.env.MongoURI
-const client = new MongoClient(mongodbURI)
-client.connect()
-.then(() => {console.log("MongoDB подключен!"), db = client.db('test')})
-.catch(error => console.error('Ошибка при подключении к MongoDB:', error))
+
 
 app.use(cors(corsOptions))
 app.use(express.json())
@@ -53,7 +49,7 @@ app.post('/account', async (req, res) => {
         const account = await db.collection('users').findOne({userNumber: userNumber})
 
         res.status(200).json({message:"Успешно получено счет пользователя:", account})
-        // res.status(201).json(account)
+        res.status(201).json(account)
     } catch (error) {
         console.error('Ошибка при получении счета:', error)
         res.status(500).json('Ошибка при получении счета')
