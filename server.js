@@ -8,14 +8,14 @@ app.get('/', (req, res) => {
 })
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://kapchyk-server.vercel.app'],
     methods: ['PUT', 'POST', 'DELETE', 'GET', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'], 
     credentials: true
 }
 
 
-const mongodbURI = 'mongodb+srv://rys5ek0v111:Miki-2006@users.itj4l.mongodb.net/?retryWrites=true&w=majority&appName=Users'
+const mongodbURI = process.env.MongoURI
 const client = new MongoClient(mongodbURI)
 client.connect()
 .then(() => {console.log("MongoDB подключен!"), db = client.db('test')})
