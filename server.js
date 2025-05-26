@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
 })
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://kapchyk-server.vercel.app'],
+    origin: ['http://localhost:3000', 'https://kapchyk-client.vercel.app'],
     methods: ['PUT', 'POST', 'DELETE', 'GET', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'], 
     credentials: true
